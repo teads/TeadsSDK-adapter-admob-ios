@@ -30,6 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Brand safety url
 @property (nonatomic, strong) NSString *pageUrl;
 
+// GDPR consent
+@property (nonatomic, strong) NSString *consent;
+
+@property (nonatomic, strong) NSString *subjectToGDPR;
+
 // MARK: - Initializers
 
 /// Default initializer.
