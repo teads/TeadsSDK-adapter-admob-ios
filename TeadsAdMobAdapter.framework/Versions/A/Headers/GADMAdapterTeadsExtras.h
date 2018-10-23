@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *subjectToGDPR;
 
+@property (nonatomic, assign) BOOL audioSessionIsApplicationManaged;
+
 // MARK: - Initializers
 
 /// Default initializer.
