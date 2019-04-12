@@ -23,6 +23,9 @@ enum {
 };
 typedef NSInteger TeadsAdapterErrorCode;
 
+static NSString* const mediationKey = @"mediation";
+static NSString* const mediationAdMob = @"admob";
+
 NS_ASSUME_NONNULL_END
 
 #endif /* GADMAdapterTeadsConstants_h */

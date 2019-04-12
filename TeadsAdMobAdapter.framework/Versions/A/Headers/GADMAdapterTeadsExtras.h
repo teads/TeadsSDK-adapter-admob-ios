@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL audioSessionIsApplicationManaged;
 
+@property (nonatomic, assign) BOOL enableValidationMode;
+
 @property (nonatomic, weak) UIView *adContainer;
 
 // MARK: - Initializers
