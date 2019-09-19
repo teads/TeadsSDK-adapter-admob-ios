@@ -39,7 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL enableValidationMode;
 
-@property (nonatomic, weak) UIView *adContainer;
+/* @deprecated adContainer should not be used from version 4.3.0, this property will be remove in the next major update. There is no need to search for a replacement. The metric associated for this context is no longer helpful on Teads side. */
+@property (nonatomic, weak) UIView *adContainer __attribute__((deprecated("adContainer should not be used from version 4.3.0, this property will be remove in the next major update. There is no need to search for a replacement. The metric associated for this context is no longer helpful on Teads side.")));
 
 // MARK: - Initializers
 
