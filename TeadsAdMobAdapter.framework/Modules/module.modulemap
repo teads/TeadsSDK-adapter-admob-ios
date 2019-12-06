@@ -3,9 +3,13 @@ framework module TeadsAdMobAdapter {
 
   export *
   module * { export * }
-}
 
-module TeadsAdMobAdapter.Swift {
-    header "TeadsAdMobAdapter-Swift.h"
-    requires objc
+  link framework "Foundation"
+  link framework "UIKit"
+  
+  header "GADMAdapterTeadsBanner.h"
+  header "GADMAdapterTeadsExtras.h"
+  header "GADMAdapterTeadsConstants.h"
+  header "GADMAdapterTeadsInterstitial.h"
+  header "GADMAdapterTeadsRewardedVideo.h"
 }
