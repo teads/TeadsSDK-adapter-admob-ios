@@ -12,8 +12,6 @@ If you want to display Teads ads in your iOS application through AdMob mediation
 
 ## Features
 
-- [x] Displaying Teads interstitials
-- [x] Displaying Teads rewarded ads
 - [x] Displaying Teads banners
 
 ## Installation
