@@ -1,5 +1,9 @@
 # Teads - iOS AdMob Mediation Adapter
 
+### v4.6.1
+_2020-03-09_
+- Enable bitcode build
+
 ### v4.6.0
 _2020-02-06_
 - GoogleMobileAdsMediationTeads in Swift, please follow [Define Custom Event](https://support.teads.tv/support/solutions/articles/36000166678-admob-google-ad-manager#defining_a_custom_event)

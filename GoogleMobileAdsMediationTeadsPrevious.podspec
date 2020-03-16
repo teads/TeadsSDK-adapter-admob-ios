@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name        = 'GoogleMobileAdsMediationTeadsPrevious'
-s.version     = '4.6.0'
+s.version     = '4.6.1'
 s.summary     = "AdMob Adapter for Teads' iOS SDK"
 s.description = <<-DESC
                 Use this adapter to include AdMob as a demand source in your mediation waterfall
