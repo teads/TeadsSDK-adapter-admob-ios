@@ -24,6 +24,4 @@ Pod::Spec.new do |s|
     s.dependency                'TeadsSDKPrevious', "#{s.version}"
     s.dependency                'Google-Mobile-Ads-SDK', '>= 7.31'
 
-    s.pod_target_xcconfig       = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES' }
-
 end
