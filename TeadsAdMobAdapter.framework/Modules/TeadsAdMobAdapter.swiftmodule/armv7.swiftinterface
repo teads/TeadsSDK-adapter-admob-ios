@@ -1,0 +1,101 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)
+// swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name TeadsAdMobAdapter
+import Foundation
+import GoogleMobileAds
+import Swift
+@_exported import TeadsAdMobAdapter
+import TeadsSDK
+@objc public class GADMAdapterTeadsRewardedVideo : ObjectiveC.NSObject, GoogleMobileAds.GADMRewardBasedVideoAdNetworkAdapter {
+  @objc public static func adapterVersion() -> Swift.String!
+  @objc public static func networkExtrasClass() -> GoogleMobileAds.GADAdNetworkExtras.Type!
+  @objc required public init!(rewardBasedVideoAdNetworkConnector connector: GoogleMobileAds.GADMRewardBasedVideoAdNetworkConnector!)
+  @objc required public init!(rewardBasedVideoAdNetworkConnector connector: GoogleMobileAds.GADMRewardBasedVideoAdNetworkConnector!, credentials: [[Swift.AnyHashable : Any]]!)
+  @objc required public init!(gadmAdNetworkConnector connector: GoogleMobileAds.GADMRewardBasedVideoAdNetworkConnector!)
+  @objc public func setUp()
+  @objc public func requestRewardBasedVideoAd()
+  @objc public func presentRewardBasedVideoAd(withRootViewController viewController: UIKit.UIViewController!)
+  @objc public func stopBeingDelegate()
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension GADMAdapterTeadsRewardedVideo : TeadsSDK.TFARewardedAdDelegate {
+  @objc dynamic public func rewardedAdDidReceive(_ rewardedAd: TeadsSDK.TFARewardedAd)
+  @objc dynamic public func rewarded(_ rewardedAd: TeadsSDK.TFARewardedAd, didFailToReceiveAdWithError: Swift.String)
+  @objc dynamic public func rewarded(_ rewardedAd: TeadsSDK.TFARewardedAd, didRewardUserWith reward: TeadsSDK.TFAReward?)
+  @objc dynamic public func rewardedAdDidOpen(_ rewardedAd: TeadsSDK.TFARewardedAd)
+  @objc dynamic public func rewardedAdDidStartPlaying(_ rewardedAd: TeadsSDK.TFARewardedAd)
+  @objc dynamic public func rewardedAdDidCompletePlaying(_ rewardedAd: TeadsSDK.TFARewardedAd)
+  @objc dynamic public func rewardedAdWillLeaveApplication(_ rewardedAd: TeadsSDK.TFARewardedAd)
+  @objc dynamic public func rewardedAdDidClose(_ rewardedAd: TeadsSDK.TFARewardedAd)
+  @objc dynamic public func rewardedAdBrowserDidOpen(_ rewardedAd: TeadsSDK.TFARewardedAd)
+}
+@objc public class GADMAdapterTeadsInterstitial : ObjectiveC.NSObject, GoogleMobileAds.GADCustomEventInterstitial {
+  @objc weak public var delegate: GoogleMobileAds.GADCustomEventInterstitialDelegate?
+  @objc public func requestAd(withParameter serverParameter: Swift.String?, label serverLabel: Swift.String?, request: GoogleMobileAds.GADCustomEventRequest)
+  @objc public func present(fromRootViewController rootViewController: UIKit.UIViewController)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension GADMAdapterTeadsInterstitial : TeadsSDK.TFAInterstitialAdDelegate {
+  @objc dynamic public func interstitialDidReceiveAd(_ ad: TeadsSDK.TFAInterstitialAd)
+  @objc dynamic public func interstitial(_ ad: TeadsSDK.TFAInterstitialAd, didFailToReceiveAdWithError error: Swift.String)
+  @objc dynamic public func interstitialWillOpen(_ ad: TeadsSDK.TFAInterstitialAd)
+  @objc dynamic public func interstitialWillClose(_ ad: TeadsSDK.TFAInterstitialAd)
+  @objc dynamic public func interstitialDidOpen(_ ad: TeadsSDK.TFAInterstitialAd)
+  @objc dynamic public func interstitialDidClose(_ ad: TeadsSDK.TFAInterstitialAd)
+  @objc dynamic public func interstitialBrowserDidOpen(_ ad: TeadsSDK.TFAInterstitialAd)
+  @objc dynamic public func interstitialBrowserDidClose(_ ad: TeadsSDK.TFAInterstitialAd)
+  @objc dynamic public func interstitialWillLeaveApplication(_ ad: TeadsSDK.TFAInterstitialAd)
+}
+@objc public class GADMAdapterTeadsBanner : ObjectiveC.NSObject, GoogleMobileAds.GADCustomEventBanner {
+  @objc weak public var delegate: GoogleMobileAds.GADCustomEventBannerDelegate?
+  @objc public func requestAd(_ adSize: GoogleMobileAds.GADAdSize, parameter serverParameter: Swift.String?, label serverLabel: Swift.String?, request: GoogleMobileAds.GADCustomEventRequest)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension GADMAdapterTeadsBanner : TeadsSDK.TFAAdDelegate {
+  @objc dynamic public func didReceiveAd(_ ad: TeadsSDK.TFAAdView, adRatio: CoreGraphics.CGFloat)
+  @objc dynamic public func didFailToReceiveAd(_ ad: TeadsSDK.TFAAdView, adFailReason: TeadsSDK.AdFailReason)
+  @objc dynamic public func adClose(_ ad: TeadsSDK.TFAAdView, userAction: Swift.Bool)
+  @objc dynamic public func adError(_ ad: TeadsSDK.TFAAdView, errorMessage: Swift.String)
+  @objc dynamic public func adBrowserDidOpen(_ ad: TeadsSDK.TFAAdView)
+  @objc dynamic public func adBrowserDidClose(_ ad: TeadsSDK.TFAAdView)
+  @objc dynamic public func adDidOpenFullscreen(_ ad: TeadsSDK.TFAAdView)
+  @objc dynamic public func adDidCloseFullscreen(_ ad: TeadsSDK.TFAAdView)
+  @objc dynamic public func adPlaybackChange(_ ad: TeadsSDK.TFAAdView, state: TeadsSDK.TFAAdView.TeadsAdPlaybackState)
+  @objc dynamic public func adDidChangeVolume(_ ad: TeadsSDK.TFAAdView, muted: Swift.Bool)
+}
+public struct GADMAdapterTeadsConstants {
+}
+public enum TeadsAdapterErrorCode : Swift.Int {
+  case pidNotFound
+  case loadingFailure
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class GADMAdapterTeadsExtras : ObjectiveC.NSObject, GoogleMobileAds.GADAdNetworkExtras {
+  @objc public var debugMode: Swift.Bool
+  @objc public var reportLocation: Swift.Bool
+  @objc public var lightEndscreenMode: Swift.Bool
+  @objc public var mediaPreloadEnabled: Swift.Bool
+  @objc public var pageUrl: Swift.String?
+  @objc public var consent: Swift.String?
+  @objc public var subjectToGDPR: Swift.String?
+  @objc public var audioSessionIsApplicationManaged: Swift.Bool
+  @objc public var enableValidationMode: Swift.Bool
+  @objc public var usPrivacy: Swift.String?
+  @available(*, deprecated, message: "adContainer should not be used from version 4.3.0, this property will be remove in the next major update. There is no need to search for a replacement. The metric associated for this context is no longer helpful on Teads side.")
+  @objc weak public var adContainer: UIKit.UIView?
+  @objc convenience public init(withRequestAdditionalParameters parameters: [Swift.AnyHashable : Any])
+  @objc public func getCustomEventExtras(forCustomEventLabel label: Swift.String) -> GoogleMobileAds.GADCustomEventExtras
+  @objc public func getTeadsAdSettings() -> TeadsSDK.TeadsAdSettings
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension TeadsAdMobAdapter.TeadsAdapterErrorCode : Swift.Equatable {}
+extension TeadsAdMobAdapter.TeadsAdapterErrorCode : Swift.Hashable {}
+extension TeadsAdMobAdapter.TeadsAdapterErrorCode : Swift.RawRepresentable {}
