@@ -1,5 +1,9 @@
 # Teads - iOS AdMob Mediation Adapter
 
+### v4.6.3
+_2020-05-05_
+- fix bitcode issue when distributing ipa
+
 ### v4.6.2
 _2020-04-21_
 - Enable [ABI](https://swift.org/blog/abi-stability-and-more/)
