@@ -1,8 +1,9 @@
 # Teads - iOS AdMob Mediation Adapter
 
-### v4.6.3
-_2020-05-05_
-- fix bitcode issue when distributing ipa
+### v4.7.0
+_2020-05-25_
+- Adapter settings redesign to TeadsAdSettings
+- Support Admob latests versions (up to 7.60.0)
 
 ### v4.6.2
 _2020-04-21_

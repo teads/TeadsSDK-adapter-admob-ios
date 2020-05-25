@@ -200,9 +200,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 /// Class adapting Teads banner to work with Google Mobile Ads mediation.
 SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 @interface GADMAdapterTeadsBanner : NSObject <GADCustomEventBanner>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak) id <GADCustomEventBannerDelegate> _Nullable delegate;
 - (void)requestBannerAd:(GADAdSize)adSize parameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class TFAAdView;
@@ -221,66 +221,15 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 - (void)adDidChangeVolume:(TFAAdView * _Nonnull)ad muted:(BOOL)muted;
 @end
 
-@class UIView;
-@class GADCustomEventExtras;
 @class TeadsAdSettings;
 
-/// Class encapsulating extra parameters for Teads custom events.
-SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsExtras")
-@interface GADMAdapterTeadsExtras : NSObject <GADAdNetworkExtras>
-/// Enable test mode
-@property (nonatomic) BOOL debugMode;
-/// Enable location reporting
-@property (nonatomic) BOOL reportLocation;
-/// Enable light mode for endscreen
-@property (nonatomic) BOOL lightEndscreenMode;
-/// Enable media preloading
-@property (nonatomic) BOOL mediaPreloadEnabled;
-/// Brand safety url
-@property (nonatomic, copy) NSString * _Nullable pageUrl;
-@property (nonatomic, copy) NSString * _Nullable consent;
-@property (nonatomic, copy) NSString * _Nullable subjectToGDPR;
-@property (nonatomic) BOOL audioSessionIsApplicationManaged;
-@property (nonatomic) BOOL enableValidationMode;
-/// U.S privacy string
-@property (nonatomic, copy) NSString * _Nullable usPrivacy;
-@property (nonatomic, weak) UIView * _Nullable adContainer SWIFT_DEPRECATED_MSG("adContainer should not be used from version 4.3.0, this property will be remove in the next major update. There is no need to search for a replacement. The metric associated for this context is no longer helpful on Teads side.");
-/// Convenient initializer creating an instance of <code>GADMAdapterTeadsExtras</code> from <code>GADRequest</code> <code>additionalParameters</code>.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-/// </ul>
-/// \param parameters <code>GADRequest</code> additional parameters.
-///
-- (nonnull instancetype)initWithRequestAdditionalParameters:(NSDictionary * _Nonnull)parameters;
-/// Creates an instance of <code>GADCustomEventExtras</code> used when sending ad network extras for
-/// custom event requests (interstitial and banners) through <code>GADRequest</code>.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADCustomEventExtras#-setextrasforlabel">GADCustomEventExtras</a>
-///   </li>
-/// </ul>
-/// \param label Custom event label defined on AdMob dashboard for the ad network.
-///
-///
-/// returns:
-/// A <code>GADCustomEventExtras</code> containing extra parameters.
-- (GADCustomEventExtras * _Nonnull)getCustomEventExtrasForCustomEventLabel:(NSString * _Nonnull)label SWIFT_WARN_UNUSED_RESULT;
-/// Creates an instance of <code>TeadsAdSettings</code> configured from ad network extra parameters.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-/// </ul>
-///
-/// returns:
-/// A <code>TeadsAdSettings</code> containing settings to configure Teads ads.
-- (TeadsAdSettings * _Nonnull)getTeadsAdSettings SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter33GADMAdapterTeadsCustomEventExtras")
+@interface GADMAdapterTeadsCustomEventExtras : GADCustomEventExtras
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
++ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @protocol GADCustomEventInterstitialDelegate;
@@ -289,10 +238,10 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsExtras")
 /// Class adapting Teads interstitial to work with Google Mobile Ads mediation.
 SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 @interface GADMAdapterTeadsInterstitial : NSObject <GADCustomEventInterstitial>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak) id <GADCustomEventInterstitialDelegate> _Nullable delegate;
 - (void)requestInterstitialAdWithParameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
 - (void)presentFromRootViewController:(UIViewController * _Nonnull)rootViewController;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class TFAInterstitialAd;
@@ -309,6 +258,7 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 - (void)interstitialWillLeaveApplication:(TFAInterstitialAd * _Nonnull)ad;
 @end
 
+@protocol GADAdNetworkExtras;
 @protocol GADMRewardBasedVideoAdNetworkConnector;
 
 /// Class adapting Teads rewarded ad to work with Google Mobile Ads mediation.
@@ -343,6 +293,12 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter29GADMAdapterTeadsRewardedVideo")
 @end
 
 
+
+
+
+
+@interface TeadsAdSettings (SWIFT_EXTENSION(TeadsAdMobAdapter)) <GADAdNetworkExtras>
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -546,9 +502,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 /// Class adapting Teads banner to work with Google Mobile Ads mediation.
 SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 @interface GADMAdapterTeadsBanner : NSObject <GADCustomEventBanner>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak) id <GADCustomEventBannerDelegate> _Nullable delegate;
 - (void)requestBannerAd:(GADAdSize)adSize parameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class TFAAdView;
@@ -567,66 +523,15 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 - (void)adDidChangeVolume:(TFAAdView * _Nonnull)ad muted:(BOOL)muted;
 @end
 
-@class UIView;
-@class GADCustomEventExtras;
 @class TeadsAdSettings;
 
-/// Class encapsulating extra parameters for Teads custom events.
-SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsExtras")
-@interface GADMAdapterTeadsExtras : NSObject <GADAdNetworkExtras>
-/// Enable test mode
-@property (nonatomic) BOOL debugMode;
-/// Enable location reporting
-@property (nonatomic) BOOL reportLocation;
-/// Enable light mode for endscreen
-@property (nonatomic) BOOL lightEndscreenMode;
-/// Enable media preloading
-@property (nonatomic) BOOL mediaPreloadEnabled;
-/// Brand safety url
-@property (nonatomic, copy) NSString * _Nullable pageUrl;
-@property (nonatomic, copy) NSString * _Nullable consent;
-@property (nonatomic, copy) NSString * _Nullable subjectToGDPR;
-@property (nonatomic) BOOL audioSessionIsApplicationManaged;
-@property (nonatomic) BOOL enableValidationMode;
-/// U.S privacy string
-@property (nonatomic, copy) NSString * _Nullable usPrivacy;
-@property (nonatomic, weak) UIView * _Nullable adContainer SWIFT_DEPRECATED_MSG("adContainer should not be used from version 4.3.0, this property will be remove in the next major update. There is no need to search for a replacement. The metric associated for this context is no longer helpful on Teads side.");
-/// Convenient initializer creating an instance of <code>GADMAdapterTeadsExtras</code> from <code>GADRequest</code> <code>additionalParameters</code>.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-/// </ul>
-/// \param parameters <code>GADRequest</code> additional parameters.
-///
-- (nonnull instancetype)initWithRequestAdditionalParameters:(NSDictionary * _Nonnull)parameters;
-/// Creates an instance of <code>GADCustomEventExtras</code> used when sending ad network extras for
-/// custom event requests (interstitial and banners) through <code>GADRequest</code>.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADCustomEventExtras#-setextrasforlabel">GADCustomEventExtras</a>
-///   </li>
-/// </ul>
-/// \param label Custom event label defined on AdMob dashboard for the ad network.
-///
-///
-/// returns:
-/// A <code>GADCustomEventExtras</code> containing extra parameters.
-- (GADCustomEventExtras * _Nonnull)getCustomEventExtrasForCustomEventLabel:(NSString * _Nonnull)label SWIFT_WARN_UNUSED_RESULT;
-/// Creates an instance of <code>TeadsAdSettings</code> configured from ad network extra parameters.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-/// </ul>
-///
-/// returns:
-/// A <code>TeadsAdSettings</code> containing settings to configure Teads ads.
-- (TeadsAdSettings * _Nonnull)getTeadsAdSettings SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter33GADMAdapterTeadsCustomEventExtras")
+@interface GADMAdapterTeadsCustomEventExtras : GADCustomEventExtras
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
++ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @protocol GADCustomEventInterstitialDelegate;
@@ -635,10 +540,10 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsExtras")
 /// Class adapting Teads interstitial to work with Google Mobile Ads mediation.
 SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 @interface GADMAdapterTeadsInterstitial : NSObject <GADCustomEventInterstitial>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak) id <GADCustomEventInterstitialDelegate> _Nullable delegate;
 - (void)requestInterstitialAdWithParameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
 - (void)presentFromRootViewController:(UIViewController * _Nonnull)rootViewController;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class TFAInterstitialAd;
@@ -655,6 +560,7 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 - (void)interstitialWillLeaveApplication:(TFAInterstitialAd * _Nonnull)ad;
 @end
 
+@protocol GADAdNetworkExtras;
 @protocol GADMRewardBasedVideoAdNetworkConnector;
 
 /// Class adapting Teads rewarded ad to work with Google Mobile Ads mediation.
@@ -689,6 +595,12 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter29GADMAdapterTeadsRewardedVideo")
 @end
 
 
+
+
+
+
+@interface TeadsAdSettings (SWIFT_EXTENSION(TeadsAdMobAdapter)) <GADAdNetworkExtras>
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -896,9 +808,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 /// Class adapting Teads banner to work with Google Mobile Ads mediation.
 SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 @interface GADMAdapterTeadsBanner : NSObject <GADCustomEventBanner>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak) id <GADCustomEventBannerDelegate> _Nullable delegate;
 - (void)requestBannerAd:(GADAdSize)adSize parameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class TFAAdView;
@@ -917,66 +829,15 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 - (void)adDidChangeVolume:(TFAAdView * _Nonnull)ad muted:(BOOL)muted;
 @end
 
-@class UIView;
-@class GADCustomEventExtras;
 @class TeadsAdSettings;
 
-/// Class encapsulating extra parameters for Teads custom events.
-SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsExtras")
-@interface GADMAdapterTeadsExtras : NSObject <GADAdNetworkExtras>
-/// Enable test mode
-@property (nonatomic) BOOL debugMode;
-/// Enable location reporting
-@property (nonatomic) BOOL reportLocation;
-/// Enable light mode for endscreen
-@property (nonatomic) BOOL lightEndscreenMode;
-/// Enable media preloading
-@property (nonatomic) BOOL mediaPreloadEnabled;
-/// Brand safety url
-@property (nonatomic, copy) NSString * _Nullable pageUrl;
-@property (nonatomic, copy) NSString * _Nullable consent;
-@property (nonatomic, copy) NSString * _Nullable subjectToGDPR;
-@property (nonatomic) BOOL audioSessionIsApplicationManaged;
-@property (nonatomic) BOOL enableValidationMode;
-/// U.S privacy string
-@property (nonatomic, copy) NSString * _Nullable usPrivacy;
-@property (nonatomic, weak) UIView * _Nullable adContainer SWIFT_DEPRECATED_MSG("adContainer should not be used from version 4.3.0, this property will be remove in the next major update. There is no need to search for a replacement. The metric associated for this context is no longer helpful on Teads side.");
-/// Convenient initializer creating an instance of <code>GADMAdapterTeadsExtras</code> from <code>GADRequest</code> <code>additionalParameters</code>.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-/// </ul>
-/// \param parameters <code>GADRequest</code> additional parameters.
-///
-- (nonnull instancetype)initWithRequestAdditionalParameters:(NSDictionary * _Nonnull)parameters;
-/// Creates an instance of <code>GADCustomEventExtras</code> used when sending ad network extras for
-/// custom event requests (interstitial and banners) through <code>GADRequest</code>.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADCustomEventExtras#-setextrasforlabel">GADCustomEventExtras</a>
-///   </li>
-/// </ul>
-/// \param label Custom event label defined on AdMob dashboard for the ad network.
-///
-///
-/// returns:
-/// A <code>GADCustomEventExtras</code> containing extra parameters.
-- (GADCustomEventExtras * _Nonnull)getCustomEventExtrasForCustomEventLabel:(NSString * _Nonnull)label SWIFT_WARN_UNUSED_RESULT;
-/// Creates an instance of <code>TeadsAdSettings</code> configured from ad network extra parameters.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-/// </ul>
-///
-/// returns:
-/// A <code>TeadsAdSettings</code> containing settings to configure Teads ads.
-- (TeadsAdSettings * _Nonnull)getTeadsAdSettings SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter33GADMAdapterTeadsCustomEventExtras")
+@interface GADMAdapterTeadsCustomEventExtras : GADCustomEventExtras
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
++ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @protocol GADCustomEventInterstitialDelegate;
@@ -985,10 +846,10 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsExtras")
 /// Class adapting Teads interstitial to work with Google Mobile Ads mediation.
 SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 @interface GADMAdapterTeadsInterstitial : NSObject <GADCustomEventInterstitial>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak) id <GADCustomEventInterstitialDelegate> _Nullable delegate;
 - (void)requestInterstitialAdWithParameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
 - (void)presentFromRootViewController:(UIViewController * _Nonnull)rootViewController;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class TFAInterstitialAd;
@@ -1005,6 +866,7 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 - (void)interstitialWillLeaveApplication:(TFAInterstitialAd * _Nonnull)ad;
 @end
 
+@protocol GADAdNetworkExtras;
 @protocol GADMRewardBasedVideoAdNetworkConnector;
 
 /// Class adapting Teads rewarded ad to work with Google Mobile Ads mediation.
@@ -1039,6 +901,12 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter29GADMAdapterTeadsRewardedVideo")
 @end
 
 
+
+
+
+
+@interface TeadsAdSettings (SWIFT_EXTENSION(TeadsAdMobAdapter)) <GADAdNetworkExtras>
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -1242,9 +1110,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 /// Class adapting Teads banner to work with Google Mobile Ads mediation.
 SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 @interface GADMAdapterTeadsBanner : NSObject <GADCustomEventBanner>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak) id <GADCustomEventBannerDelegate> _Nullable delegate;
 - (void)requestBannerAd:(GADAdSize)adSize parameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class TFAAdView;
@@ -1263,66 +1131,15 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 - (void)adDidChangeVolume:(TFAAdView * _Nonnull)ad muted:(BOOL)muted;
 @end
 
-@class UIView;
-@class GADCustomEventExtras;
 @class TeadsAdSettings;
 
-/// Class encapsulating extra parameters for Teads custom events.
-SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsExtras")
-@interface GADMAdapterTeadsExtras : NSObject <GADAdNetworkExtras>
-/// Enable test mode
-@property (nonatomic) BOOL debugMode;
-/// Enable location reporting
-@property (nonatomic) BOOL reportLocation;
-/// Enable light mode for endscreen
-@property (nonatomic) BOOL lightEndscreenMode;
-/// Enable media preloading
-@property (nonatomic) BOOL mediaPreloadEnabled;
-/// Brand safety url
-@property (nonatomic, copy) NSString * _Nullable pageUrl;
-@property (nonatomic, copy) NSString * _Nullable consent;
-@property (nonatomic, copy) NSString * _Nullable subjectToGDPR;
-@property (nonatomic) BOOL audioSessionIsApplicationManaged;
-@property (nonatomic) BOOL enableValidationMode;
-/// U.S privacy string
-@property (nonatomic, copy) NSString * _Nullable usPrivacy;
-@property (nonatomic, weak) UIView * _Nullable adContainer SWIFT_DEPRECATED_MSG("adContainer should not be used from version 4.3.0, this property will be remove in the next major update. There is no need to search for a replacement. The metric associated for this context is no longer helpful on Teads side.");
-/// Convenient initializer creating an instance of <code>GADMAdapterTeadsExtras</code> from <code>GADRequest</code> <code>additionalParameters</code>.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-/// </ul>
-/// \param parameters <code>GADRequest</code> additional parameters.
-///
-- (nonnull instancetype)initWithRequestAdditionalParameters:(NSDictionary * _Nonnull)parameters;
-/// Creates an instance of <code>GADCustomEventExtras</code> used when sending ad network extras for
-/// custom event requests (interstitial and banners) through <code>GADRequest</code>.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADCustomEventExtras#-setextrasforlabel">GADCustomEventExtras</a>
-///   </li>
-/// </ul>
-/// \param label Custom event label defined on AdMob dashboard for the ad network.
-///
-///
-/// returns:
-/// A <code>GADCustomEventExtras</code> containing extra parameters.
-- (GADCustomEventExtras * _Nonnull)getCustomEventExtrasForCustomEventLabel:(NSString * _Nonnull)label SWIFT_WARN_UNUSED_RESULT;
-/// Creates an instance of <code>TeadsAdSettings</code> configured from ad network extra parameters.
-/// <ul>
-///   <li>
-///     Doc for <a href="https://developers.google.com/admob/ios/api/reference/Classes/GADRequest#-registeradnetworkextras">GADRequest</a>
-///   </li>
-/// </ul>
-///
-/// returns:
-/// A <code>TeadsAdSettings</code> containing settings to configure Teads ads.
-- (TeadsAdSettings * _Nonnull)getTeadsAdSettings SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter33GADMAdapterTeadsCustomEventExtras")
+@interface GADMAdapterTeadsCustomEventExtras : GADCustomEventExtras
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
++ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @protocol GADCustomEventInterstitialDelegate;
@@ -1331,10 +1148,10 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsExtras")
 /// Class adapting Teads interstitial to work with Google Mobile Ads mediation.
 SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 @interface GADMAdapterTeadsInterstitial : NSObject <GADCustomEventInterstitial>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak) id <GADCustomEventInterstitialDelegate> _Nullable delegate;
 - (void)requestInterstitialAdWithParameter:(NSString * _Nullable)serverParameter label:(NSString * _Nullable)serverLabel request:(GADCustomEventRequest * _Nonnull)request;
 - (void)presentFromRootViewController:(UIViewController * _Nonnull)rootViewController;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class TFAInterstitialAd;
@@ -1351,6 +1168,7 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 - (void)interstitialWillLeaveApplication:(TFAInterstitialAd * _Nonnull)ad;
 @end
 
+@protocol GADAdNetworkExtras;
 @protocol GADMRewardBasedVideoAdNetworkConnector;
 
 /// Class adapting Teads rewarded ad to work with Google Mobile Ads mediation.
@@ -1385,6 +1203,12 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter29GADMAdapterTeadsRewardedVideo")
 @end
 
 
+
+
+
+
+@interface TeadsAdSettings (SWIFT_EXTENSION(TeadsAdMobAdapter)) <GADAdNetworkExtras>
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
