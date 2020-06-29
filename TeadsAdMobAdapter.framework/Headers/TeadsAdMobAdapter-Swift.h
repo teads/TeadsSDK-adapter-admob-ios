@@ -209,6 +209,17 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class TeadsAdSettings;
+@class GADCustomEventExtras;
+
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter16GADMAdapterTeads")
+@interface GADMAdapterTeads : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
++ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
++ (GADCustomEventExtras * _Nonnull)customEventExtraWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @protocol GADCustomEventBannerDelegate;
 @class GADCustomEventRequest;
 
@@ -236,17 +247,6 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 - (void)adDidChangeVolume:(TFAAdView * _Nonnull)ad muted:(BOOL)muted;
 @end
 
-@class TeadsAdSettings;
-
-SWIFT_CLASS("_TtC17TeadsAdMobAdapter33GADMAdapterTeadsCustomEventExtras")
-@interface GADMAdapterTeadsCustomEventExtras : GADCustomEventExtras
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
-+ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 @protocol GADCustomEventInterstitialDelegate;
 @class UIViewController;
 
@@ -271,6 +271,31 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 - (void)interstitialBrowserDidOpen:(TFAInterstitialAd * _Nonnull)ad;
 - (void)interstitialBrowserDidClose:(TFAInterstitialAd * _Nonnull)ad;
 - (void)interstitialWillLeaveApplication:(TFAInterstitialAd * _Nonnull)ad;
+@end
+
+@protocol GADCustomEventNativeAdDelegate;
+
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsNative")
+@interface GADMAdapterTeadsNative : NSObject <GADCustomEventNativeAd>
+@property (nonatomic, weak) id <GADCustomEventNativeAdDelegate> _Nullable delegate;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)requestNativeAdWithParameter:(NSString * _Nonnull)serverParameter request:(GADCustomEventRequest * _Nonnull)request adTypes:(NSArray * _Nonnull)adTypes options:(NSArray * _Nonnull)options rootViewController:(UIViewController * _Nonnull)rootViewController;
+- (BOOL)handlesUserClicks SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)handlesUserImpressions SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class TeadsAdPlacement;
+@class TeadsNativeAd;
+
+@interface GADMAdapterTeadsNative (SWIFT_EXTENSION(TeadsAdMobAdapter)) <TeadsAdPlacementDelegate>
+- (void)adPlacement:(TeadsAdPlacement * _Nonnull)adPlacement didReceiveNativeAd:(TeadsNativeAd * _Nonnull)nativeAd;
+- (void)adPlacement:(TeadsAdPlacement * _Nonnull)adPlacement didFailToReceiveAd:(AdFailReason * _Nonnull)adFailReason;
+@end
+
+
+@interface GADMAdapterTeadsNative (SWIFT_EXTENSION(TeadsAdMobAdapter)) <TeadsNativeAdDelegate>
+- (void)nativeAdDidRecordAdClick:(TeadsNativeAd * _Nonnull)nativeAd;
+- (void)nativeAdDidRecordAdImpression:(TeadsNativeAd * _Nonnull)nativeAd;
 @end
 
 @protocol GADAdNetworkExtras;
@@ -306,8 +331,6 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter29GADMAdapterTeadsRewardedVideo")
 - (void)rewardedAdDidClose:(TFARewardedAd * _Nonnull)rewardedAd;
 - (void)rewardedAdBrowserDidOpen:(TFARewardedAd * _Nonnull)rewardedAd;
 @end
-
-
 
 
 
@@ -526,6 +549,17 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class TeadsAdSettings;
+@class GADCustomEventExtras;
+
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter16GADMAdapterTeads")
+@interface GADMAdapterTeads : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
++ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
++ (GADCustomEventExtras * _Nonnull)customEventExtraWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @protocol GADCustomEventBannerDelegate;
 @class GADCustomEventRequest;
 
@@ -553,17 +587,6 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 - (void)adDidChangeVolume:(TFAAdView * _Nonnull)ad muted:(BOOL)muted;
 @end
 
-@class TeadsAdSettings;
-
-SWIFT_CLASS("_TtC17TeadsAdMobAdapter33GADMAdapterTeadsCustomEventExtras")
-@interface GADMAdapterTeadsCustomEventExtras : GADCustomEventExtras
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
-+ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 @protocol GADCustomEventInterstitialDelegate;
 @class UIViewController;
 
@@ -588,6 +611,31 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 - (void)interstitialBrowserDidOpen:(TFAInterstitialAd * _Nonnull)ad;
 - (void)interstitialBrowserDidClose:(TFAInterstitialAd * _Nonnull)ad;
 - (void)interstitialWillLeaveApplication:(TFAInterstitialAd * _Nonnull)ad;
+@end
+
+@protocol GADCustomEventNativeAdDelegate;
+
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsNative")
+@interface GADMAdapterTeadsNative : NSObject <GADCustomEventNativeAd>
+@property (nonatomic, weak) id <GADCustomEventNativeAdDelegate> _Nullable delegate;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)requestNativeAdWithParameter:(NSString * _Nonnull)serverParameter request:(GADCustomEventRequest * _Nonnull)request adTypes:(NSArray * _Nonnull)adTypes options:(NSArray * _Nonnull)options rootViewController:(UIViewController * _Nonnull)rootViewController;
+- (BOOL)handlesUserClicks SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)handlesUserImpressions SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class TeadsAdPlacement;
+@class TeadsNativeAd;
+
+@interface GADMAdapterTeadsNative (SWIFT_EXTENSION(TeadsAdMobAdapter)) <TeadsAdPlacementDelegate>
+- (void)adPlacement:(TeadsAdPlacement * _Nonnull)adPlacement didReceiveNativeAd:(TeadsNativeAd * _Nonnull)nativeAd;
+- (void)adPlacement:(TeadsAdPlacement * _Nonnull)adPlacement didFailToReceiveAd:(AdFailReason * _Nonnull)adFailReason;
+@end
+
+
+@interface GADMAdapterTeadsNative (SWIFT_EXTENSION(TeadsAdMobAdapter)) <TeadsNativeAdDelegate>
+- (void)nativeAdDidRecordAdClick:(TeadsNativeAd * _Nonnull)nativeAd;
+- (void)nativeAdDidRecordAdImpression:(TeadsNativeAd * _Nonnull)nativeAd;
 @end
 
 @protocol GADAdNetworkExtras;
@@ -623,8 +671,6 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter29GADMAdapterTeadsRewardedVideo")
 - (void)rewardedAdDidClose:(TFARewardedAd * _Nonnull)rewardedAd;
 - (void)rewardedAdBrowserDidOpen:(TFARewardedAd * _Nonnull)rewardedAd;
 @end
-
-
 
 
 
@@ -847,6 +893,17 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class TeadsAdSettings;
+@class GADCustomEventExtras;
+
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter16GADMAdapterTeads")
+@interface GADMAdapterTeads : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
++ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
++ (GADCustomEventExtras * _Nonnull)customEventExtraWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @protocol GADCustomEventBannerDelegate;
 @class GADCustomEventRequest;
 
@@ -874,17 +931,6 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 - (void)adDidChangeVolume:(TFAAdView * _Nonnull)ad muted:(BOOL)muted;
 @end
 
-@class TeadsAdSettings;
-
-SWIFT_CLASS("_TtC17TeadsAdMobAdapter33GADMAdapterTeadsCustomEventExtras")
-@interface GADMAdapterTeadsCustomEventExtras : GADCustomEventExtras
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
-+ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 @protocol GADCustomEventInterstitialDelegate;
 @class UIViewController;
 
@@ -909,6 +955,31 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 - (void)interstitialBrowserDidOpen:(TFAInterstitialAd * _Nonnull)ad;
 - (void)interstitialBrowserDidClose:(TFAInterstitialAd * _Nonnull)ad;
 - (void)interstitialWillLeaveApplication:(TFAInterstitialAd * _Nonnull)ad;
+@end
+
+@protocol GADCustomEventNativeAdDelegate;
+
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsNative")
+@interface GADMAdapterTeadsNative : NSObject <GADCustomEventNativeAd>
+@property (nonatomic, weak) id <GADCustomEventNativeAdDelegate> _Nullable delegate;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)requestNativeAdWithParameter:(NSString * _Nonnull)serverParameter request:(GADCustomEventRequest * _Nonnull)request adTypes:(NSArray * _Nonnull)adTypes options:(NSArray * _Nonnull)options rootViewController:(UIViewController * _Nonnull)rootViewController;
+- (BOOL)handlesUserClicks SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)handlesUserImpressions SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class TeadsAdPlacement;
+@class TeadsNativeAd;
+
+@interface GADMAdapterTeadsNative (SWIFT_EXTENSION(TeadsAdMobAdapter)) <TeadsAdPlacementDelegate>
+- (void)adPlacement:(TeadsAdPlacement * _Nonnull)adPlacement didReceiveNativeAd:(TeadsNativeAd * _Nonnull)nativeAd;
+- (void)adPlacement:(TeadsAdPlacement * _Nonnull)adPlacement didFailToReceiveAd:(AdFailReason * _Nonnull)adFailReason;
+@end
+
+
+@interface GADMAdapterTeadsNative (SWIFT_EXTENSION(TeadsAdMobAdapter)) <TeadsNativeAdDelegate>
+- (void)nativeAdDidRecordAdClick:(TeadsNativeAd * _Nonnull)nativeAd;
+- (void)nativeAdDidRecordAdImpression:(TeadsNativeAd * _Nonnull)nativeAd;
 @end
 
 @protocol GADAdNetworkExtras;
@@ -944,8 +1015,6 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter29GADMAdapterTeadsRewardedVideo")
 - (void)rewardedAdDidClose:(TFARewardedAd * _Nonnull)rewardedAd;
 - (void)rewardedAdBrowserDidOpen:(TFARewardedAd * _Nonnull)rewardedAd;
 @end
-
-
 
 
 
@@ -1164,6 +1233,17 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class TeadsAdSettings;
+@class GADCustomEventExtras;
+
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter16GADMAdapterTeads")
+@interface GADMAdapterTeads : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
++ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
++ (GADCustomEventExtras * _Nonnull)customEventExtraWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @protocol GADCustomEventBannerDelegate;
 @class GADCustomEventRequest;
 
@@ -1191,17 +1271,6 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsBanner")
 - (void)adDidChangeVolume:(TFAAdView * _Nonnull)ad muted:(BOOL)muted;
 @end
 
-@class TeadsAdSettings;
-
-SWIFT_CLASS("_TtC17TeadsAdMobAdapter33GADMAdapterTeadsCustomEventExtras")
-@interface GADMAdapterTeadsCustomEventExtras : GADCustomEventExtras
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultLabel;)
-+ (NSString * _Nonnull)defaultLabel SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWith:(TeadsAdSettings * _Nonnull)teadsAdSettings for:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 @protocol GADCustomEventInterstitialDelegate;
 @class UIViewController;
 
@@ -1226,6 +1295,31 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter28GADMAdapterTeadsInterstitial")
 - (void)interstitialBrowserDidOpen:(TFAInterstitialAd * _Nonnull)ad;
 - (void)interstitialBrowserDidClose:(TFAInterstitialAd * _Nonnull)ad;
 - (void)interstitialWillLeaveApplication:(TFAInterstitialAd * _Nonnull)ad;
+@end
+
+@protocol GADCustomEventNativeAdDelegate;
+
+SWIFT_CLASS("_TtC17TeadsAdMobAdapter22GADMAdapterTeadsNative")
+@interface GADMAdapterTeadsNative : NSObject <GADCustomEventNativeAd>
+@property (nonatomic, weak) id <GADCustomEventNativeAdDelegate> _Nullable delegate;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)requestNativeAdWithParameter:(NSString * _Nonnull)serverParameter request:(GADCustomEventRequest * _Nonnull)request adTypes:(NSArray * _Nonnull)adTypes options:(NSArray * _Nonnull)options rootViewController:(UIViewController * _Nonnull)rootViewController;
+- (BOOL)handlesUserClicks SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)handlesUserImpressions SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class TeadsAdPlacement;
+@class TeadsNativeAd;
+
+@interface GADMAdapterTeadsNative (SWIFT_EXTENSION(TeadsAdMobAdapter)) <TeadsAdPlacementDelegate>
+- (void)adPlacement:(TeadsAdPlacement * _Nonnull)adPlacement didReceiveNativeAd:(TeadsNativeAd * _Nonnull)nativeAd;
+- (void)adPlacement:(TeadsAdPlacement * _Nonnull)adPlacement didFailToReceiveAd:(AdFailReason * _Nonnull)adFailReason;
+@end
+
+
+@interface GADMAdapterTeadsNative (SWIFT_EXTENSION(TeadsAdMobAdapter)) <TeadsNativeAdDelegate>
+- (void)nativeAdDidRecordAdClick:(TeadsNativeAd * _Nonnull)nativeAd;
+- (void)nativeAdDidRecordAdImpression:(TeadsNativeAd * _Nonnull)nativeAd;
 @end
 
 @protocol GADAdNetworkExtras;
@@ -1261,8 +1355,6 @@ SWIFT_CLASS("_TtC17TeadsAdMobAdapter29GADMAdapterTeadsRewardedVideo")
 - (void)rewardedAdDidClose:(TFARewardedAd * _Nonnull)rewardedAd;
 - (void)rewardedAdBrowserDidOpen:(TFARewardedAd * _Nonnull)rewardedAd;
 @end
-
-
 
 
 

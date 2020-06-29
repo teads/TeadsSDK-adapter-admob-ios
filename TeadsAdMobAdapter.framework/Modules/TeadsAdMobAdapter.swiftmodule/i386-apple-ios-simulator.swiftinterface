@@ -6,17 +6,6 @@ import GoogleMobileAds
 import Swift
 @_exported import TeadsAdMobAdapter
 import TeadsSDK
-@objc extension TeadsAdSettings : GoogleMobileAds.GADAdNetworkExtras {
-}
-@objc public class GADMAdapterTeadsCustomEventExtras : GoogleMobileAds.GADCustomEventExtras {
-  @objc public static let defaultLabel: Swift.String
-  @objc public init(with teadsAdSettings: TeadsSDK.TeadsAdSettings, for label: Swift.String = defaultLabel)
-  @objc override dynamic public init()
-  @objc deinit
-}
-extension GADRequest {
-  @nonobjc public func register(teadsAdSettings: TeadsSDK.TeadsAdSettings, for label: Swift.String = GADMAdapterTeadsCustomEventExtras.defaultLabel)
-}
 @objc public class GADMAdapterTeadsRewardedVideo : ObjectiveC.NSObject, GoogleMobileAds.GADMRewardBasedVideoAdNetworkAdapter {
   @objc public static func adapterVersion() -> Swift.String!
   @objc public static func networkExtrasClass() -> GoogleMobileAds.GADAdNetworkExtras.Type!
@@ -40,6 +29,31 @@ extension GADMAdapterTeadsRewardedVideo : TeadsSDK.TFARewardedAdDelegate {
   @objc dynamic public func rewardedAdWillLeaveApplication(_ rewardedAd: TeadsSDK.TFARewardedAd)
   @objc dynamic public func rewardedAdDidClose(_ rewardedAd: TeadsSDK.TFARewardedAd)
   @objc dynamic public func rewardedAdBrowserDidOpen(_ rewardedAd: TeadsSDK.TFARewardedAd)
+}
+@objc public class GADMAdapterTeadsNative : ObjectiveC.NSObject, GoogleMobileAds.GADCustomEventNativeAd {
+  @objc weak public var delegate: GoogleMobileAds.GADCustomEventNativeAdDelegate?
+  @objc required override dynamic public init()
+  @objc public func request(withParameter serverParameter: Swift.String, request: GoogleMobileAds.GADCustomEventRequest, adTypes: [Any], options: [Any], rootViewController: UIKit.UIViewController)
+  @objc public func handlesUserClicks() -> Swift.Bool
+  @objc public func handlesUserImpressions() -> Swift.Bool
+  @objc deinit
+}
+extension GADMAdapterTeadsNative : TeadsSDK.TeadsAdPlacementDelegate {
+  @objc dynamic public func adPlacement(_ adPlacement: TeadsSDK.TeadsAdPlacement, didReceiveNativeAd nativeAd: TeadsSDK.TeadsNativeAd)
+  @objc dynamic public func adPlacement(_ adPlacement: TeadsSDK.TeadsAdPlacement, didFailToReceiveAd adFailReason: TeadsSDK.AdFailReason)
+}
+extension GADMAdapterTeadsNative : TeadsSDK.TeadsNativeAdDelegate {
+  @objc dynamic public func nativeAdDidRecordAdClick(_ nativeAd: TeadsSDK.TeadsNativeAd)
+  @objc dynamic public func nativeAdDidRecordAdImpression(_ nativeAd: TeadsSDK.TeadsNativeAd)
+  public func nativeAdDidRecordAdLeftApplication(_ nativeAd: TeadsSDK.TeadsNativeAd)
+}
+extension TeadsAdSettings : GoogleMobileAds.GADAdNetworkExtras {
+}
+@objc public class GADMAdapterTeads : ObjectiveC.NSObject {
+  @objc public static let defaultLabel: Swift.String
+  @objc public class func customEventExtra(with teadsAdSettings: TeadsSDK.TeadsAdSettings, for label: Swift.String = defaultLabel) -> GoogleMobileAds.GADCustomEventExtras
+  @objc override dynamic public init()
+  @objc deinit
 }
 @objc public class GADMAdapterTeadsInterstitial : ObjectiveC.NSObject, GoogleMobileAds.GADCustomEventInterstitial {
   @objc required override dynamic public init()
