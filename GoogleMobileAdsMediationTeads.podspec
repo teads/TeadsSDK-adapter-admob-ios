@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
     s.static_framework          = true
     s.requires_arc              = true
     s.source_files              = 'TeadsAdMobAdapter/**/*{.swift}'
+    s.swift_versions            = ['4.3', '5.0', '5.1']
 
     s.dependency                'TeadsSDK', s.version.to_s
     s.dependency                'Google-Mobile-Ads-SDK', '>= 7.59'
