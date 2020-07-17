@@ -52,6 +52,10 @@ import GoogleMobileAds
 // MARK: - TFAAdDelegate Protocol
 
 extension GADMAdapterTeadsBanner: TFAAdDelegate {
+    public func didUpdateRatio(_ ad: TFAAdView, ratio: CGFloat) {
+        //will be implemented soon
+    }
+
     public func didReceiveAd(_ ad: TFAAdView, adRatio: CGFloat) {
         delegate?.customEventBanner(self, didReceiveAd: ad)
     }
