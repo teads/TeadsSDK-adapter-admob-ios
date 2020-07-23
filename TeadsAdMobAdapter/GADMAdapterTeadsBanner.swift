@@ -47,16 +47,20 @@ import GoogleMobileAds
         banner.load(teadsAdSettings: adSettings)
         currentBanner = banner
     }
+
+    private func updateRatio(_ ratio: CGFloat) {
+        if let width = currentBanner?.frame.width {
+            currentBanner?.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width / ratio))
+        }
+    }
 }
 
 // MARK: - TFAAdDelegate Protocol
 
 extension GADMAdapterTeadsBanner: TFAAdDelegate {
-    public func didUpdateRatio(_ ad: TFAAdView, ratio: CGFloat) {
-        //will be implemented soon
-    }
 
     public func didReceiveAd(_ ad: TFAAdView, adRatio: CGFloat) {
+        updateRatio(adRatio)
         delegate?.customEventBanner(self, didReceiveAd: ad)
     }
 
@@ -98,6 +102,10 @@ extension GADMAdapterTeadsBanner: TFAAdDelegate {
 
     public func adDidChangeVolume(_ ad: TFAAdView, muted: Bool) {
         // TODO: What to do ?
+    }
+
+    public func didUpdateRatio(_ ad: TFAAdView, ratio: CGFloat) {
+        updateRatio(ratio)
     }
 
     // TODO: add support for these optional callbacks
