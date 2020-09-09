@@ -16,33 +16,17 @@ class GADMAdapterTeadsMediatedNativeAd: NSObject {
     var mappedIcon: GADNativeAdImage?
     var extras = [String: Any]()
 
-    init(teadsNativeAd: TeadsNativeAd, nativeAdViewAdOptions: GADNativeAdImageAdLoaderOptions?) {
+    init(teadsNativeAd: TeadsNativeAd) {
         self.teadsNativeAd = teadsNativeAd
         super.init()
 
-        if let teadsAdImageUrl = teadsNativeAd.imageUrl,
-            let stringUrl = teadsAdImageUrl.url,
-            let url = URL(string: stringUrl) {
-            if nativeAdViewAdOptions?.disableImageLoading ?? false {
-                mappedImages = [GADNativeAdImage(url: url, scale: 1)]
-            } else {
-                UIImage.loadSync(url: stringUrl) { [weak self] (image) in
-                    self?.mappedImages = [GADNativeAdImage(image: image)]
-                }
-            }
-        }
+        teadsNativeAd.imageUrl?.loadImage(async: false, success: { [weak self] image in
+            self?.mappedImages = [GADNativeAdImage(image: image)]
+        })
 
-        if let teadsAdIconUrl = teadsNativeAd.iconUrl,
-            let stringUrl = teadsAdIconUrl.url,
-            let url = URL(string: stringUrl) {
-            if nativeAdViewAdOptions?.disableImageLoading ?? false {
-                mappedIcon = GADNativeAdImage(url: url, scale: 1)
-            } else {
-                UIImage.loadSync(url: stringUrl) { [weak self] (image) in
-                    self?.mappedIcon = GADNativeAdImage(image: image)
-                }
-            }
-        }
+        teadsNativeAd.iconUrl?.loadImage(async: false, success: { [weak self] image in
+            self?.mappedIcon = GADNativeAdImage(image: image)
+        })
 
     }
 }

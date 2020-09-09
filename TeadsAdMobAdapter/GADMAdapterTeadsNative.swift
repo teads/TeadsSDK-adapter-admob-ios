@@ -60,7 +60,7 @@ extension GADMAdapterTeadsNative: TeadsAdPlacementDelegate {
         // Bind the mediated Teads ad with admob
         currentNativeAd = nativeAd
         currentNativeAd?.delegate = self
-        mediatedNativeAd = GADMAdapterTeadsMediatedNativeAd(teadsNativeAd: nativeAd, nativeAdViewAdOptions: nil)
+        mediatedNativeAd = GADMAdapterTeadsMediatedNativeAd(teadsNativeAd: nativeAd)
         guard let mediatedNativeAd = mediatedNativeAd else {
             return
         }
