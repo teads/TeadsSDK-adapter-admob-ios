@@ -1,5 +1,9 @@
 # Teads - iOS AdMob Mediation Adapter
 
+### v4.7.8
+_2020-09-21_
+ - Update version to match Teads SDK
+
 ### v4.7.7
 _2020-09-09_
 - Update version to match TeadsSDK
