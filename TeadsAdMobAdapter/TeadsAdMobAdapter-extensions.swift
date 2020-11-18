@@ -30,3 +30,9 @@ extension TeadsAdSettings: GADAdNetworkExtras {
         return customEventExtras
     }
 }
+
+extension CGFloat {
+    var positive: CGFloat? {
+        return self > 0 ? self : nil
+    }
+}

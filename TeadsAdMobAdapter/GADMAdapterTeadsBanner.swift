@@ -49,7 +49,7 @@ import GoogleMobileAds
     }
 
     private func updateRatio(_ ratio: CGFloat) {
-        if let width = currentBanner?.frame.width {
+        if let width = currentBanner?.frame.width.positive {
             currentBanner?.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width / ratio))
         }
     }
@@ -106,6 +106,11 @@ extension GADMAdapterTeadsBanner: TFAAdDelegate {
 
     public func didUpdateRatio(_ ad: TFAAdView, ratio: CGFloat) {
         updateRatio(ratio)
+    }
+
+    public func adBrowserWillOpen(_ ad: TFAAdView) -> UIViewController? {
+        delegate?.customEventBannerWillPresentModal(self)
+        return delegate?.viewControllerForPresentingModalView
     }
 
     // TODO: add support for these optional callbacks
