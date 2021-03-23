@@ -1,5 +1,9 @@
 # Teads - iOS AdMob Mediation Adapter
 
+### v4.8.5
+_2021-03-23_
+Support of Google Mobile Ads SVK v8
+
 ### v4.8.4
 _2021-02-12_
 - fix a crash that could happen using `TeadsAdSettings.subscribeAdResizeDelegate`

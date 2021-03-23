@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name                      = 'GoogleMobileAdsMediationTeads'
-    s.version                   = '4.8.4'
+    s.version                   = '4.8.5'
     s.summary                   = "AdMob Adapter for Teads' iOS SDK"
     s.module_name               = 'TeadsAdMobAdapter'
     s.description               = <<-DESC
@@ -21,6 +21,12 @@ Pod::Spec.new do |s|
     s.swift_versions            = ['4.3', '5.0', '5.1']
 
     s.dependency                'TeadsSDK', s.version.to_s
-    s.dependency                'Google-Mobile-Ads-SDK', '>= 7.59', '< 8.0.0'
-
+    s.dependency                'Google-Mobile-Ads-SDK', '>= 8.0'
+    s.pod_target_xcconfig		= { 
+		'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386'
+	}
+  
+	s.user_target_xcconfig		= {
+		'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386'
+	}
 end

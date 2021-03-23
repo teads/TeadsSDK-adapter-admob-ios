@@ -14,7 +14,7 @@ extension TeadsAdSettings: GADAdNetworkExtras {
     @nonobjc internal class func instance(fromAdmobParameters dictionary: [AnyHashable: Any]?) throws -> TeadsAdSettings {
         let adSettings = try TeadsAdSettings.instance(from: dictionary ?? Dictionary())
         adSettings.addExtras(TeadsAdSettings.integrationAdmob, for: TeadsAdSettings.integrationTypeKey)
-        adSettings.addExtras(GADRequest.sdkVersion(), for: TeadsAdSettings.integrationVersionKey)
+        adSettings.addExtras(GADMobileAds.sharedInstance().sdkVersion, for: TeadsAdSettings.integrationVersionKey)
         return adSettings
     }
 }

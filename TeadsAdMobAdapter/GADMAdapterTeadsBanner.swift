@@ -42,10 +42,11 @@ import GoogleMobileAds
         // Load banner
         let banner = TFACustomAdView(withPid: pid, andDelegate: self)
         banner.addContextInfo(infoKey: TeadsAdSettings.integrationTypeKey, infoValue: TeadsAdSettings.integrationAdmob)
-        banner.addContextInfo(infoKey: TeadsAdSettings.integrationVersionKey, infoValue: GADRequest.sdkVersion())
+        banner.addContextInfo(infoKey: TeadsAdSettings.integrationVersionKey, infoValue: GADMobileAds.sharedInstance().sdkVersion)
         banner.frame = CGRect(origin: CGPoint.zero, size: CGSizeFromGADAdSize(adSize))
         banner.load(teadsAdSettings: adSettings)
         currentBanner = banner
+
     }
 
     private func updateRatio(_ ratio: CGFloat) {
@@ -61,6 +62,7 @@ extension GADMAdapterTeadsBanner: TFAAdDelegate {
 
     public func didReceiveAd(_ ad: TFAAdView, adRatio: CGFloat) {
         updateRatio(adRatio)
+
         delegate?.customEventBanner(self, didReceiveAd: ad)
     }
 
@@ -114,6 +116,6 @@ extension GADMAdapterTeadsBanner: TFAAdDelegate {
     }
 
     // TODO: add support for these optional callbacks
-    //- (void)customEventBannerWillLeaveApplication:(id<GADCustomEventBanner>)customEvent;
+    // - (void)customEventBannerWillLeaveApplication:(id<GADCustomEventBanner>)customEvent;
     // We should handle a new TFAAdDelegate.adWillLeaveApplication to handle app to app opening
 }
