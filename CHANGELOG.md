@@ -1,5 +1,9 @@
 # Teads - iOS AdMob Mediation Adapter
 
+### v4.8.6
+_2021-05-05_
+- Fix issue causing first ad experience stopping when using the SDK for the first time
+
 ### v4.8.5
 _2021-03-23_
 Support of Google Mobile Ads SVK v8
