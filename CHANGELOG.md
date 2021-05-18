@@ -1,5 +1,9 @@
 # Teads - iOS AdMob Mediation Adapter
 
+### v4.8.7
+_2021-05-18_
+- Update version to match TeadsSDK
+
 ### v4.8.6
 _2021-05-05_
 - Fix issue causing first ad experience stopping when using the SDK for the first time

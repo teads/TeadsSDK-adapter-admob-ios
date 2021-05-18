@@ -91,7 +91,7 @@ extension GADMAdapterTeadsMediatedNativeAd: GADMediatedUnifiedNativeAd {
         return nil
     }
 
-    func didRender(in view: UIView, clickableAssetViews: [GADUnifiedNativeAssetIdentifier: UIView], nonclickableAssetViews: [GADUnifiedNativeAssetIdentifier: UIView], viewController: UIViewController) {
+    func didRender(in view: UIView, clickableAssetViews: [GADNativeAssetIdentifier: UIView], nonclickableAssetViews: [GADNativeAssetIdentifier: UIView], viewController: UIViewController) {
 
         teadsNativeAd.registerContainer(in: view)
 
