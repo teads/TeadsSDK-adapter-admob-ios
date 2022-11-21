@@ -1,6 +1,17 @@
 # Teads - iOS AdMob Mediation Adapter
 > Mediation adapter to be used in conjunction with AdMob to deliver Teads ads on iOS devices.
 
+> **⚠️ This repository is deprecated ⚠️**
+>
+> Please follow instructions [here](https://github.com/teads/TeadsSDK-iOS/blob/master/MediationAdapters/TeadsAdMobAdapter/README.md) about TeadsAdMobAdapter
+> 
+> Using cocoapods, you need to update your podfile.
+> ```ruby
+> platform :ios, '10.0'
+> pod 'TeadsAdMobAdapter', '~> 5.0'
+> ```
+> [Teads Sample App](https://github.com/teads/TeadsSDK-iOS) includes AdMob Integration
+
 If you want to display Teads ads in your iOS application through AdMob mediation, you’re at the right place.
 
 ## Requirements
